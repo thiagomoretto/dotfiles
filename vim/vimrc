@@ -1,0 +1,290 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" Plugins
+Plugin 'tpope/vim-fugitive'
+Plugin 'bling/vim-airline'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'ervandew/supertab'
+Plugin 'tpope/vim-surround'
+Plugin 'mileszs/ack.vim'
+Plugin 'DavidEGx/ctrlp-smarttabs'
+Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
+
+" Python
+Plugin 'nvie/vim-flake8'
+Plugin 'hdima/python-syntax'
+Plugin 'klen/python-mode'
+
+call vundle#end()
+filetype plugin indent on
+
+" airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+set laststatus=2
+
+" flake8
+let g:flake8_show_in_gutter = 1
+let g:flake8_show_in_file = 1
+
+" python
+let python_highlight_all = 1
+
+" theme
+set background=dark
+
+" easymotion
+nmap s <Plug>(easymotion-s)
+let g:EasyMotion_smartcase = 1
+
+" ctrlp
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc|class)$'
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" vim
+filetype plugin on
+syntax on
+set tabstop=4 shiftwidth=4 expandtab
+set backspace=indent,eol,start
+set mouse=a
+set ts=2
+set expandtab
+set nu
+set ai
+set si
+set ci
+set cursorline
+
+" spell checking
+" setlocal spell spelllang=en_us
+" set complete+=kspell
+autocmd FileType gitcommit setlocal spell
+
+" tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" nerdtree
+let NERDTreeIgnore = ['\.pyc$']
+
+" ctrlp smarttabs
+let g:ctrlp_extensions = ['smarttabs']
+nnoremap <F3> :CtrlPSmartTabs<CR>
+
+" airline tabline
+set hidden
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>' :enew<cr>
+nmap <leader>] :bnext<CR>
+nmap <leader>[ :bprevious<CR>
+
+nnoremap <F11> :bprevious<CR>
+nnoremap <F12> :bnext<CR>
+
+nnoremap <C-,> :bprevious<CR>
+nnoremap <C-.> :bnext<CR>
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
+
+" ipdb
+cnoreabbrev ipdbclear g/ipdb/d
+
+" quote a word
+nnoremap qw :silent! normal mpea'<Esc>bi'<Esc>`pl
+" double quote a word
+nnoremap qd :silent! normal mpea"<Esc>bi"<Esc>`pl
+" remove quotes from a word
+nnoremap wq :silent! normal mpeld bhd `ph<CR>
+
+nnoremap pw :silent! normal mpea)<Esc>bi(<Esc>`pl
+nnoremap [w :silent! normal mpea]<Esc>bi[<Esc>`pl
+
+if has("gui_running")
+  let s:uname = system("uname")
+  if s:uname == "Darwin\n"
+    set guifont=Meslo\ LG\ M\ DZ\ Regular\ for\ Powerline:h14
+  endif
+  set guioptions-=r " Remove scrollbars
+  set guioptions-=R " Remove scrollbars
+  set guioptions-=l " Remove scrollbars
+  set guioptions-=L " Remove scrollbars
+  set guioptions-=T " Remove toolbars
+
+  colorscheme solarized
+
+  " Awesome visual selection maintained when indenting.
+  vmap <D-]> >gv
+  vmap <D-[> <gv
+  " Map Command-# to switch tabs
+  map  <D-0> 0gt
+  imap <D-0> <Esc>0gt
+  map  <D-1> 1gt
+  imap <D-1> <Esc>1gt
+  map  <D-2> 2gt
+  imap <D-2> <Esc>2gt
+  map  <D-3> 3gt
+  imap <D-3> <Esc>3gt
+  map  <D-4> 4gt
+  imap <D-4> <Esc>4gt
+  map  <D-5> 5gt
+  imap <D-5> <Esc>5gt
+  map  <D-6> 6gt
+  imap <D-6> <Esc>6gt
+  map  <D-7> 7gt
+  imap <D-7> <Esc>7gt
+  map  <D-8> 8gt
+  imap <D-8> <Esc>8gt
+  map  <D-9> 9gt
+  imap <D-9> <Esc>9gt
+endif
+
+" from Vimbox
+vmap <D-/> <c-_><c-_>
+vmap <D-s-/> <c-_>b
+nmap <D-/> gc$
+vmap <C-c> "y+
+
+" nerdtree
+let g:nerdtree_tabs_focus_on_files = 1
+let g:nerdtree_tabs_open_on_gui_startup = 0
+if has("gui_running")
+  if has("gui_macvim")
+    map <D-e> :NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
+    imap <D-e> <Esc>:NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
+    vmap <D-e> <Esc>:NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
+    nmap <D-e> <Esc>:NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
+
+    map <D-E> :NERDTreeTabsOpen<Cr>:NERDTreeTabsFind<Cr><c-w><c-w><c-w><c-p>
+    imap <D-E> <Esc>:NERDTreeTabsOpen<Cr>:NERDTreeTabsFind<Cr><c-w><c-w><c-w><c-p>
+    vmap <D-E> <Esc>:NERDTreeTabsOpen<Cr>:NERDTreeTabsFind<Cr><c-w><c-w><c-w><c-p>
+    nmap <D-E> <Esc>:NERDTreeTabsOpen<Cr>:NERDTreeTabsFind<Cr><c-w><c-w><c-w><c-p>
+  endif
+  if has("gui_win32")
+    map <F11> :NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
+    imap <F11> <Esc>:NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
+    vmap <F11> <Esc>:NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
+    nmap <F11> <Esc>:NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
+  endif
+endif
+
+" easytags
+let g:easytags_async = 1
+let g:easytags_auto_highlight = 0
+let g:easytags_opts = ['-R', '--language-force=python', '--python-kinds=-i']
+
+" Bclose()
+" delete buffer without closing window
+function! Bclose()
+  let curbufnr = bufnr("%")
+  let altbufnr = bufnr("#")
+
+  if buflisted(altbufnr)
+    buffer #
+  else
+    bnext
+  endif
+
+  if bufnr("%") == curbufnr
+    new
+  endif
+
+  if buflisted(curbufnr)
+    execute("bdelete! " . curbufnr)
+  endif
+endfunction
+
+" Python-mode
+" Activate rope
+" Keys:
+" K             Show python docs
+" <Ctrl-Space>  Rope autocomplete
+" <Ctrl-c>g     Rope goto definition
+" <Ctrl-c>d     Rope show documentation
+" <Ctrl-c>f     Rope find occurrences
+" <Leader>b     Set, unset breakpoint (g:pymode_breakpoint enabled)
+" [[            Jump on previous class or function (normal, visual, operator modes)
+" ]]            Jump on next class or function (normal, visual, operator modes)
+" [M            Jump on previous class or method (normal, visual, operator modes)
+" ]M            Jump on next class or method (normal, visual, operator modes)
+let g:pymode_folding = 0
+
+" lint/checkers
+let g:pymode_lint_on_write = 1
+let g:pymode_lint_checkers = ['pep8', 'pyflakes']
+let g:pymode_lint_cwindow = 0
+let g:pymode_lint_message = 1
+
+" doc
+let g:pymode_doc = 0
+let g:pymode_rope_completion = 1
+set completeopt=menu
+
+" If you prefer the Omni-Completion tip window to close when a selection is
+" made, these lines close it on movement in insert mode or when leaving
+" insert mode
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" python-mode bindings
+map <leader>j :RopeGotoDefinition<CR>
+map <leader>r :RopeRename<CR>
+
+" visual bell
+set vb t_vb=
+
+" jump faster
+map <C-Up> 5k
+map <C-Down> 5j
+
+" jump windows
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+
+" insert mode bindings
+" - delete line (fixme)
+" nnoremap <A-d> :d<CR>==
+" inoremap <A-d> <Esc>:d<CR>==gi
+" vnoremap <A-d> :d<CR>gv=gv
+
+" - copy-and-paste line.
+" x move line up.
+" x move line down.
+nnoremap <A-Up> :m .-2<CR>==
+nnoremap <A-Down> :m .+1<CR>==
+inoremap <A-Up> <Esc>:m .-2<CR>==gi
+inoremap <A-Down> <Esc>:m .+1<CR>==gi
+vnoremap <A-Up> :m '<-2<CR>gv=gv
+vnoremap <A-Down> :m '>+1<CR>gv=gv
+
+" - shift+tab tab left from cursor.
+" - ctrl+tab tab line.
+" - ctrl+shift+tab tab left line.
+nnoremap <S-Tab> <<
+inoremap <S-Tab> <C-d>
+vmap <Tab> >gv
+vmap <S-Tab> <gv
