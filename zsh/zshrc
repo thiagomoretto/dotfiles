@@ -1,0 +1,9 @@
+# Enable zle
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+bindkey -M vicmd v edit-command-line
+
+# Does not duplicate history (useful to use with fzf).
+setopt hist_ignore_dups
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
