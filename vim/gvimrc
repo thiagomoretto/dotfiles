@@ -1,0 +1,34 @@
+macm  Window.Select\ Next\ Tab key=<nop>
+nmap <D-}> :bnext<CR>
+imap <D-}> :bnext<CR>
+
+macm Window.Select\ Previous\ Tab key=<nop>
+nmap <D-{> :bprev<CR>
+imap <D-{> :bprev<CR>
+
+map <D-\|> :blast <CR>
+map <D-+>  :BufExplorer<CR>
+map <D-S-BS> :bdelete<CR>
+
+macm File.Save key=<nop>
+imap <D-s> <ESC>:w<CR> " insert mode
+nmap <D-s> :w<CR>      " normal mode
+
+macm File.Close key=<nop>
+nmap <D-w> :call Bclose()<CR>
+
+macm File.New\ Tab key=<nop>
+imap <D-t> <ESC>:enew<CR>
+nmap <D-t> :enew<CR>
+
+" VimBox
+map <D-/> <c-_><c-_>
+map <D-s-/> <c-_>b
+map <D-/> gc$
+
+nnoremap <A-Up> :m .-2<CR>==
+nnoremap <A-Down> :m .+1<CR>==
+inoremap <A-Up> <Esc>:m .-2<CR>==gi
+inoremap <A-Down> <Esc>:m .+1<CR>==gi
+vnoremap <A-Up> :m '<-2<CR>gv=gv
+vnoremap <A-Down> :m '>+1<CR>gv=gv
