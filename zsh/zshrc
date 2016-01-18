@@ -7,3 +7,16 @@ bindkey -M vicmd v edit-command-line
 # Does not duplicate history (useful to use with fzf).
 setopt hist_ignore_dups
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+function git-add() {
+    git add $(git status -s | egrep '^(\s|\?\?).*?$' | fzf -m | cut -c4-)
+    git commit -v
+}
+
+function git-remove() {
+    git reset HEAD $(git status -s | egrep -v '^\s.*?$' | grep -v ?? | fzf -m | cut -c4-)
+}
+
+function git-checkout() {
+    git checkout -- $(git status -s | egrep '^(\s|\?\?).*?$' | fzf -m | cut -c4-)
+}
