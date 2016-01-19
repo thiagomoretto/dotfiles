@@ -27,6 +27,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'DavidEGx/ctrlp-smarttabs'
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
+Plugin 'junegunn/limelight.vim'
 
 " Python
 Plugin 'nvie/vim-flake8'
