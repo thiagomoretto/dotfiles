@@ -234,7 +234,7 @@ endfunction
 let g:pymode_folding = 0
 
 " lint/checkers
-let g:pymode_lint_on_write = 1
+let g:pymode_lint_on_write = 0
 let g:pymode_lint_checkers = ['pep8', 'pyflakes']
 let g:pymode_lint_cwindow = 0
 let g:pymode_lint_message = 1
