@@ -29,11 +29,15 @@ Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 Plugin 'junegunn/limelight.vim'
 Plugin 'junegunn/vim-xmark'
+Plugin 'sjl/gundo.vim'
 
 " Python
 Plugin 'nvie/vim-flake8'
 Plugin 'hdima/python-syntax'
 Plugin 'klen/python-mode'
+
+" Go
+Plugin 'fatih/vim-go'
 
 call vundle#end()
 filetype plugin indent on
@@ -290,3 +294,6 @@ nnoremap <S-Tab> <<
 inoremap <S-Tab> <C-d>
 vmap <Tab> >gv
 vmap <S-Tab> <gv
+
+" gundo
+nnoremap <F5> :GundoToggle<CR>
