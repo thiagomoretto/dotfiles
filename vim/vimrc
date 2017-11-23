@@ -1,6 +1,9 @@
 set nocompatible
 filetype off
 
+let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python2_host_prog = '/usr/local/bin/python2.7'
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -30,6 +33,16 @@ Plugin 'xolox/vim-misc'
 Plugin 'junegunn/limelight.vim'
 Plugin 'junegunn/vim-xmark'
 Plugin 'sjl/gundo.vim'
+Plugin 'mhinz/vim-startify'
+Plugin 'w0rp/ale'
+Plugin 'janko-m/vim-test'
+Plugin 'brooth/far.vim'
+
+" FIXME
+" if has('nvim')
+"   Plugin 'roxma/nvim-completion-manager'
+"   Plugin 'roxma/vim-hug-neovim-rpc'
+" endif
 
 " Python
 Plugin 'nvie/vim-flake8'
@@ -139,7 +152,7 @@ if has("gui_running")
   set guioptions-=L " Remove scrollbars
   set guioptions-=T " Remove toolbars
 
-  colorscheme solarized
+  colorscheme wombat
 
   " Awesome visual selection maintained when indenting.
   vmap <D-]> >gv
@@ -200,6 +213,9 @@ endif
 let g:easytags_async = 1
 let g:easytags_auto_highlight = 0
 let g:easytags_opts = ['-R', '--language-force=python', '--python-kinds=-i']
+" per project
+set tags=./.tags;
+let g:easytags_dynamic_files = 1
 
 " Bclose()
 " delete buffer without closing window
@@ -245,7 +261,7 @@ let g:pymode_lint_message = 1
 
 " doc
 let g:pymode_doc = 0
-let g:pymode_rope_completion = 1
+let g:pymode_rope_completion = 0
 set completeopt=menu
 
 " If you prefer the Omni-Completion tip window to close when a selection is
