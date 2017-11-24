@@ -22,6 +22,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'kien/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'majutsushi/tagbar'
 Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'ervandew/supertab'
@@ -78,6 +79,12 @@ let g:EasyMotion_smartcase = 1
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc|class)$'
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" ctrlp funky
+nnoremap <Leader>p :CtrlPFunky<Cr>
+nnoremap <C-o> :CtrlPFunky<CR>
+let g:ctrlp_funky_syntax_highlight = 1
+autocmd BufEnter ControlP let b:ale_enabled = 0
 
 " vim
 filetype plugin on
