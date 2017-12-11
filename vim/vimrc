@@ -38,6 +38,7 @@ Plugin 'mhinz/vim-startify'
 Plugin 'w0rp/ale'
 Plugin 'janko-m/vim-test'
 Plugin 'brooth/far.vim'
+Plugin 'gabesoft/vim-ags'
 
 " FIXME
 " if has('nvim')
