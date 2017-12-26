@@ -1,0 +1,3 @@
+clear mod4
+keycode 115 = Super_L
+add Mod4 = Super_L
