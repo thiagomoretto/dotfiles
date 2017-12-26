@@ -151,6 +151,7 @@ nnoremap [w :silent! normal mpea]<Esc>bi[<Esc>`pl
 
 if has("gui_running")
   let s:uname = system("uname")
+  set guifont=Inconsolata-g\ for\ Powerline\ Medium\ 10
   if s:uname == "Darwin\n"
     set guifont=Meslo\ LG\ M\ DZ\ Regular\ for\ Powerline:h14
   endif
@@ -198,6 +199,11 @@ vmap <C-c> "y+
 let g:nerdtree_tabs_focus_on_files = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
 if has("gui_running")
+  map <D-e> :NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
+  imap <D-e> <Esc>:NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
+  vmap <D-e> <Esc>:NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
+  nmap <D-e> <Esc>:NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
+
   if has("gui_macvim")
     map <D-e> :NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
     imap <D-e> <Esc>:NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>

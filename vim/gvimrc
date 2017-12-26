@@ -1,8 +1,8 @@
-macm  Window.Select\ Next\ Tab key=<nop>
+" macm  Window.Select\ Next\ Tab key=<nop>
 nmap <D-}> :bnext<CR>
 imap <D-}> :bnext<CR>
 
-macm Window.Select\ Previous\ Tab key=<nop>
+" macm Window.Select\ Previous\ Tab key=<nop>
 nmap <D-{> :bprev<CR>
 imap <D-{> :bprev<CR>
 
@@ -10,14 +10,14 @@ map <D-\|> :blast <CR>
 map <D-+>  :BufExplorer<CR>
 map <D-S-BS> :bdelete<CR>
 
-macm File.Save key=<nop>
+" macm File.Save key=<nop>
 imap <D-s> <ESC>:w<CR> " insert mode
 nmap <D-s> :w<CR>      " normal mode
 
-macm File.Close key=<nop>
+" macm File.Close key=<nop>
 nmap <D-w> :call Bclose()<CR>
 
-macm File.New\ Tab key=<nop>
+" macm File.New\ Tab key=<nop>
 imap <D-t> <ESC>:enew<CR>
 nmap <D-t> :enew<CR>
 
