@@ -129,6 +129,13 @@ nnoremap <F12> :bnext<CR>
 nnoremap <C-,> :bprevious<CR>
 nnoremap <C-.> :bnext<CR>
 
+map <C-PageDown> :bprev<CR>
+map <C-PageUp> :bnext<CR>
+ "map <C-w> :bdelete<CR>
+
+imap <C-s> <ESC>:w<CR> " insert mode
+nmap <C-s> :w<CR>      " normal mode
+
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
 nmap <leader>bq :bp <BAR> bd #<CR>
@@ -222,6 +229,11 @@ if has("gui_running")
     nmap <F11> <Esc>:NERDTreeTabsToggle<Cr><c-w><c-w><c-w><c-p>
   endif
 endif
+
+map  <F2> :NERDTreeTabsToggle<Cr>
+imap <F2> <Esc>:NERDTreeTabsToggle<Cr>
+vmap <F2> <Esc>:NERDTreeTabsToggle<Cr>
+nmap <F2> <Esc>:NERDTreeTabsToggle<Cr>
 
 " easytags
 let g:easytags_async = 1
