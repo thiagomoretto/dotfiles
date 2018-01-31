@@ -131,10 +131,10 @@ nnoremap <C-.> :bnext<CR>
 
 map <C-PageDown> :bprev<CR>
 map <C-PageUp> :bnext<CR>
- "map <C-w> :bdelete<CR>
+map <C-q> :call Bclose()<CR>
 
-imap <C-s> <ESC>:w<CR> " insert mode
-nmap <C-s> :w<CR>      " normal mode
+imap <C-s> <ESC>:w<CR>
+nmap <C-s> :w<CR>       " normal mode
 
 " Close the current buffer and move to the previous one
 " This replicates the idea of closing a tab
