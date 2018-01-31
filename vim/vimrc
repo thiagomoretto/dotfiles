@@ -29,7 +29,7 @@ Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-surround'
 Plugin 'mileszs/ack.vim'
 Plugin 'DavidEGx/ctrlp-smarttabs'
-Plugin 'xolox/vim-easytags'
+" Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 Plugin 'junegunn/limelight.vim'
 Plugin 'junegunn/vim-xmark'
@@ -39,6 +39,7 @@ Plugin 'w0rp/ale'
 Plugin 'janko-m/vim-test'
 Plugin 'brooth/far.vim'
 Plugin 'gabesoft/vim-ags'
+Plugin 'ludovicchabant/vim-gutentags'
 
 " FIXME
 " if has('nvim')
@@ -236,12 +237,11 @@ vmap <F2> <Esc>:NERDTreeTabsToggle<Cr>
 nmap <F2> <Esc>:NERDTreeTabsToggle<Cr>
 
 " easytags
-let g:easytags_async = 1
-let g:easytags_auto_highlight = 0
-let g:easytags_opts = ['-R', '--language-force=python', '--python-kinds=-i']
-" per project
-set tags=./.tags;
-let g:easytags_dynamic_files = 1
+" let g:easytags_async = 1
+" let g:easytags_auto_highlight = 0
+" let g:easytags_opts = ['-R', '--language-force=python', '--python-kinds=-i']
+" set tags=./.tags;
+" let g:easytags_dynamic_files = 1
 
 " Bclose()
 " delete buffer without closing window
