@@ -130,8 +130,8 @@ nnoremap <F12> :bnext<CR>
 nnoremap <C-,> :bprevious<CR>
 nnoremap <C-.> :bnext<CR>
 
-map <C-PageDown> :bprev<CR>
-map <C-PageUp> :bnext<CR>
+map <C-PageDown> :bnext<CR>
+map <C-PageUp> :bprev<CR>
 map <C-q> :call Bclose()<CR>
 
 imap <C-s> <ESC>:w<CR>
