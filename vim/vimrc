@@ -40,6 +40,7 @@ Plugin 'janko-m/vim-test'
 Plugin 'brooth/far.vim'
 Plugin 'gabesoft/vim-ags'
 Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 " FIXME
 " if has('nvim')
