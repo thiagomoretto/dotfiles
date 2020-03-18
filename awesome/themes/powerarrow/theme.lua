@@ -1,9 +1,9 @@
 
 --[[
-                                 
-     Powerarrow Awesome WM theme 
-     github.com/copycat-killer   
-                                 
+
+     Powerarrow Awesome WM theme
+     github.com/copycat-killer
+
 --]]
 
 local gears = require("gears")
@@ -15,23 +15,34 @@ local os, math, string = os, math, string
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow"
-theme.wallpaper                                 = theme.dir .. "/../../wallpapers/wal4.jpg"
--- theme.font                                      = "Inconsolata 10"
+-- theme.wallpaper                                 = theme.dir .. "/../../wallpapers/wal3.jpg"
+theme.wallpaper                                 = theme.dir .. "/../multicolor/wall.png"
+theme.font                                      = "Inconsolata 12"
+-- theme.font                                      = "Monaco 10"
 -- theme.font                                      = "DejaVu Sans Mono 10"
-theme.font                                      = "xos4 Terminus 12"
+-- theme.font                                      = "xos4 Terminus 12"
+theme.bg_normal = "#222222"
 theme.fg_normal                                 = "#FEFEFE"
 theme.fg_focus                                  = "#32D6FF"
 theme.fg_urgent                                 = "#C83F11"
-theme.bg_normal                                 = "#222222"
 theme.bg_focus                                  = "#1E2320"
 theme.bg_urgent                                 = "#3F3F3F"
-theme.taglist_fg_focus                          = "#00CCFF"
+-- theme.taglist_fg_focus                          = "#00CCFF"
+theme.taglist_bg_focus = "#474747"
+theme.taglist_fg_focus                          = "#73d1ff"
+theme.tasklist_bg_normal                        = "#222222"
 theme.tasklist_bg_focus                         = "#222222"
-theme.tasklist_fg_focus                         = "#00CCFF"
+theme.tasklist_fg_focus                         = "#73d1ff"
+-- https://awesomewm.org/doc/api/libraries/gears.shape.html
+theme.tasklist_shape = gears.shape.rectangle
+theme.tasklist_shape_border_width = 1
+theme.tasklist_shape_border_color = "#666666"
+-- theme.tasklist_fg_focus                         = "#00CCFF"
 theme.border_width                              = 1
 theme.border_normal                             = "#3F3F3F"
 theme.border_focus                              = "#6F6F6F"
--- theme.border_focus                              = "#ff0000"  
+-- theme.border_focus                              = "#ff0000"
+theme.prompt_bg_cursor = "#c0c0c0"
 theme.border_marked                             = "#CC9393"
 theme.titlebar_bg_focus                         = "#3F3F3F"
 theme.titlebar_bg_normal                        = "#3F3F3F"
@@ -77,9 +88,11 @@ theme.widget_mail                               = theme.dir .. "/icons/mail.png"
 theme.widget_mail_on                            = theme.dir .. "/icons/mail_on.png"
 theme.widget_task                               = theme.dir .. "/icons/task.png"
 theme.widget_scissors                           = theme.dir .. "/icons/scissors.png"
-theme.tasklist_plain_task_name                  = true
+theme.tasklist_plain_task_name                  = false
 theme.tasklist_disable_icon                     = true
 theme.useless_gap                               = 0
+theme.tasklist_align = "center"
+theme.tasklist_disable_task_name = false
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"
 theme.titlebar_ontop_button_focus_active        = theme.dir .. "/icons/titlebar/ontop_focus_active.png"
@@ -115,7 +128,7 @@ theme.cal = lain.widget.calendar({
     --cal = "cal --color=always",
     attach_to = { binclock.widget },
     notification_preset = {
-        font = "xos4 Terminus 10",
+        font = "Inconsolata 10",
         fg   = theme.fg_normal,
         bg   = theme.bg_normal
     }
@@ -154,7 +167,7 @@ local mail = lain.widget.imap({
 -- ALSA volume
 theme.volume = lain.widget.alsabar({
     --togglechannel = "IEC958,3",
-    notification_preset = { font = "xos4 Terminus 10", fg = theme.fg_normal },
+    notification_preset = { font = "Inconsolata 10", fg = theme.fg_normal },
 })
 
 -- MPD
@@ -221,7 +234,7 @@ local tempicon = wibox.widget.imagebox(theme.widget_temp)
 local fsicon = wibox.widget.imagebox(theme.widget_hdd)
 theme.fs = lain.widget.fs({
     options  = "--exclude-type=tmpfs",
-    notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "xos4 Terminus 10" },
+    notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "Inconsolata 10" },
     settings = function()
         widget:set_markup(markup.font(theme.font, " " .. fs_now.available_gb .. "GB "))
     end
@@ -296,7 +309,11 @@ function theme.at_screen_connect(s)
     gears.wallpaper.maximized(theme.wallpaper, s, true)
 
     -- Tags
-    awful.tag(awful.util.tagnames, s, awful.layout.layouts)
+    awful.tag(awful.util.tagnames, s, awful.layout.layouts[0])
+
+    clock_format = "%H:%M"
+    utc_textclock = wibox.widget.textclock(" " .. clock_format, nil, "Z")
+    s.local_textclock = wibox.widget.textclock(" " .. clock_format .. " ")
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -309,10 +326,12 @@ function theme.at_screen_connect(s)
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
     -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+    s.mytaglist = wibox.container.margin(
+        awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons, { bg_color = "#343434" }), 0, 10)
 
     -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
+    s.mytasklist = wibox.container.margin(
+        awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons, { ma}), 0, 10)
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, height = 36, bg = theme.bg_normal, fg = theme.fg_normal })
@@ -330,8 +349,10 @@ function theme.at_screen_connect(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            spotify_widget,
             wibox.widget.systray(),
+            arrow("#222222", "#343434"),
+            wibox.container.background(spotify_widget, "#343434"),
+            arrow("#343434", "#343434"),
             -- wibox.container.margin(scissors, 4, 8),
             --[[ using shapes
             pl(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, "#343434"),
@@ -346,7 +367,7 @@ function theme.at_screen_connect(s)
             pl(binclock.widget, "#777E76"),
             --]]
             -- using separators
-            arrow(theme.bg_normal, "#343434"),
+            -- arrow(theme.bg_normal, "#343434"),
             -- wibox.container.background(wibox.container.margin(wibox.widget { mailicon, mail and mail.widget, layout = wibox.layout.align.horizontal }, 4, 7), "#343434"),
             -- arrow("#343434", theme.bg_normal),
             -- wibox.container.background(wibox.container.margin(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, 3, 6), theme.bg_focus),
@@ -366,8 +387,10 @@ function theme.at_screen_connect(s)
             wibox.container.background(wibox.container.margin(wibox.widget { nil, neticon, net.widget, layout = wibox.layout.align.horizontal }, 3, 3), "#C0C0A2"),
             arrow("#C0C0A2", "#777E76"),
             wibox.container.background(wibox.container.margin(binclock.widget, 4, 8), "#777E76"),
-            arrow("#777E76", "alpha"),
+            arrow("#777E76", "#343434"),
             --]]
+            arrow("#343434", "#343434"),
+            wibox.container.background(s.local_textclock, "#343434"),
             s.mylayoutbox,
         },
     }

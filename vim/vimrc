@@ -39,8 +39,10 @@ Plugin 'w0rp/ale'
 Plugin 'janko-m/vim-test'
 Plugin 'brooth/far.vim'
 Plugin 'gabesoft/vim-ags'
-Plugin 'ludovicchabant/vim-gutentags'
+" Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
+" Plugin 'ngmy/vim-rubocop'
+Plugin 'posva/vim-vue'
 
 " FIXME
 " if has('nvim')
@@ -65,14 +67,16 @@ let g:airline_powerline_fonts = 1
 set laststatus=2
 
 " flake8
-let g:flake8_show_in_gutter = 1
-let g:flake8_show_in_file = 1
+let g:flake8_show_in_gutter = 0
+let g:flake8_show_in_file = 0
+let g:flake8_cmd="/home/thiago/.asdf/shims/python2-flake8"
 
 " python
 let python_highlight_all = 1
 
 " theme
-set background=dark
+" set background=dark
+" colorscheme github
 
 " easymotion
 nmap s <Plug>(easymotion-s)
@@ -92,7 +96,7 @@ autocmd BufEnter ControlP let b:ale_enabled = 0
 " vim
 filetype plugin on
 syntax on
-set tabstop=4 shiftwidth=4 expandtab
+set tabstop=4 shiftwidth=2 expandtab
 set backspace=indent,eol,start
 set mouse=a
 set ts=2
@@ -157,7 +161,7 @@ nnoremap wq :silent! normal mpeld bhd `ph<CR>
 
 nnoremap pw :silent! normal mpea)<Esc>bi(<Esc>`pl
 nnoremap [w :silent! normal mpea]<Esc>bi[<Esc>`pl
-
+  
 if has("gui_running")
   let s:uname = system("uname")
   set guifont=Inconsolata-g\ for\ Powerline\ Medium\ 10
@@ -282,9 +286,10 @@ let g:pymode_folding = 0
 
 " lint/checkers
 let g:pymode_lint_on_write = 0
-let g:pymode_lint_checkers = ['pep8', 'pyflakes']
+" let g:pymode_lint_checkers = ['pep8', 'pyflakes']
+let g:pymode_lint_checkers = []
 let g:pymode_lint_cwindow = 0
-let g:pymode_lint_message = 1
+let g:pymode_lint_message = 0
 
 " doc
 let g:pymode_doc = 0
@@ -358,3 +363,58 @@ function! ModuleToClipboard()
 endfunction
 
 noremap <silent> <C-_><C-c> :call ModuleToClipboard() <CR>
+
+"let test#python#pytest#options = "-s"
+"
+"function! test#python#pytest#build_args(args) abort
+"  let args = a:args
+"
+"  if test#base#no_colors()
+"    let args = ['--color=no'] + args
+"  endif
+"
+"  let args = ['-s'] + args
+"
+"  return args
+"endfunction
+
+let test#python#runner = 'pytest'
+
+map <C-c> "+y<CR>
+
+autocmd BufWritePre *.py %s/\s\+$//e
+autocmd BufWritePre *.rb %s/\s\+$//e
+autocmd BufWritePre *.js %s/\s\+$//e
+autocmd BufWritePre *.css %s/\s\+$//e
+autocmd BufWritePre *.scss %s/\s\+$//e
+autocmd BufWritePre Gemfile %s/\s\+$//e
+autocmd BufWritePre *.erb %s/\s\+$//e
+autocmd BufWritePre *.html %s/\s\+$//e
+autocmd BufWritePre *.yml %s/\s\+$//e
+autocmd BufWritePre *.vue %s/\s\+$//e
+
+let g:loaded_vimrubocop = 0
+
+let g:flake8_show_in_gutter=0
+
+" Ctrl+backspace
+
+" inoremap <Char-0x07F> <BS> 
+" nnoremap <Char-0x07F> <BS>
+" 
+" noremap! <C-BS> <C-w>
+" noremap! <C-h> <C-w>
+
+" inoremap <C-w> <C-\><C-o>dB
+" inoremap <C-BS> <C-\><C-o>db
+
+" imap <C-BS> <C-w>
+
+" inoremap  <backspace> 
+" inoremap <delete> <backspace>
+"
+
+" Copy to clipboard
+vmap <C-c> "+y
+
+" set ffs=unix

@@ -1,9 +1,9 @@
 
 --[[
-                                       
-     Awesome WM configuration template 
-     github.com/copycat-killer         
-                                       
+
+     Awesome WM configuration template
+     github.com/copycat-killer
+
 --]]
 
 -- {{{ Required libraries
@@ -17,6 +17,9 @@ local wibox         = require("wibox")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local lain          = require("lain")
+local xrandr        = require("xrandr")
+local foggy         = require("foggy")
+--local cyclefocus    = require('cyclefocus')
 --local menubar       = require("menubar")
 local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
@@ -68,7 +71,7 @@ local gui_editor   = "gvim"
 local browser      = "chrominum"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "term", "editor", "web", "misc", "sound" }
+awful.util.tagnames = { "term", "editor", "web", "misc", "sound", "extra" }
 awful.layout.layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
@@ -90,7 +93,7 @@ awful.layout.layouts = {
     --lain.layout.cascade.tile,
     --lain.layout.centerwork,
     --lain.layout.centerwork.horizontal,
-    lain.layout.termfair,
+    --lain.layout.termfair,
     --lain.layout.termfair.center,
 }
 awful.util.taglist_buttons = awful.util.table.join(
@@ -211,6 +214,10 @@ globalkeys = awful.util.table.join(
     -- Take a screenshot
     -- https://github.com/copycat-killer/dots/blob/master/bin/screenshot
     awful.key({ altkey }, "p", function() os.execute("screenshot") end),
+
+    -- Xrandr
+    -- awful.key({ modkey,           }, "d",    function() xrandr.xrandr() end),
+    -- awful.key({ modkey,           }, "d",    foggy.menu),
 
     -- Hotkeys
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
