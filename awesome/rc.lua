@@ -71,7 +71,7 @@ local gui_editor   = "gvim"
 local browser      = "chrominum"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "term", "editor", "web", "misc", "sound", "extra" }
+awful.util.tagnames = { "term", "editor", "web", "misc", "sound", "fin", "extra" }
 awful.layout.layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
